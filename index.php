@@ -2,7 +2,9 @@
 
 // подключаем файл с бд
 require_once('db.php');
+// comment
 require_once('header.php');
+// comment
 require_once('footer.php');
 
 
