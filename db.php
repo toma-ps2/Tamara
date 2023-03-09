@@ -8,7 +8,7 @@ try {
         PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8',
 	];
 
-	$dbh = new PDO('mysql:dbname=nordic2023;host=localhost', 'root', 'root',$option);
+	$dbh = new PDO('mysql:dbname=world;host=localhost', 'root', '',$option);
 
 } catch (PDOException $e) {
 	die($e->getMessage());
