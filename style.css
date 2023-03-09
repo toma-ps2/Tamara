@@ -1,0 +1,37 @@
+.d-none {
+
+}
+
+form {
+    width: 400px;
+    margin: 0 auto;
+}
+
+form input {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 10px;
+    font-size: 24px;
+    outline: none;
+}
+
+input::placeholder {
+    color: red;
+    font-style: italic;
+}
+
+.search__result {
+    width: 100%;
+}
+
+.search__result li {
+    cursor: pointer;
+    padding: 5px;
+    font-size: 24px;
+    list-style-type:none;
+}
+
+.search__result li:hover {
+    color: green;
+    background-color: rgba(0, 0, 0, 0.055);
+}
