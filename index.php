@@ -1,5 +1,5 @@
 <?php
-
+// comment
 // подключаем файл с бд
 require_once('db.php');
 // comment
