@@ -1,0 +1,12 @@
+form {
+    box-sizing: border-box;
+    width: 300px;
+    margin: 0 auto;
+}
+
+form input {
+    padding: 10px;
+    display: block;
+}
+
+
