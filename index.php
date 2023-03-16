@@ -1,4 +1,7 @@
 <?php
+session_start();
+echo'<pre>';
+var_dump($_SESSION);
 // comment
 // подключаем файл с бд
 require_once('db.php');

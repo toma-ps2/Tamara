@@ -15,4 +15,7 @@
     <script defer src="search.js?v=<?=$version?>"></script>
 </head>
 <body>
-    <header></header>
+    <header>
+        <a href="/shop2023/admin.php">Админ панель</a>
+        <a href="handler.php?logout=true">Выход</a>
+    </header>
