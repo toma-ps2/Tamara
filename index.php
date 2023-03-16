@@ -1,4 +1,5 @@
 <?php
+session_start();
 // comment
 // подключаем файл с бд
 require_once('db.php');
@@ -7,8 +8,6 @@ require_once('header.php');
 require_once('search.php');
 // comment
 require_once('footer.php');
-
-
 
 // формируем запрос
 $sql = 'SELECT name,code FROM country';

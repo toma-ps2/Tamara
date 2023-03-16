@@ -1,7 +1,20 @@
 <?php
-
+session_start();
 //echo '<pre>';
 // $_POST - массив - содержит в себе информацию о POST запросе
+
+if (isset($_GET['logout']))
+{
+    // перезаписываем сессию
+    $_SESSION = [];
+    // очищаем куку для сесси
+    setcookie(session_name(),'',time()-999999);
+    // уничтожаем сессию
+    session_destroy();
+    // перенаправляем пользователя на главную странчку
+    header('Location: /shop2023/sign.php',true,301);
+    exit;
+}
 
 
 if (isset($_POST['action']))
@@ -94,15 +107,22 @@ function auth()
     // переменная содержит подключение к бд
     $dbh = $GLOBALS['dbh'];
     $sql = "SELECT * FROM users WHERE (login='$login' or email='$email') AND password = '$p1' ";
-
-    // SELECT * FROM `users` WHERE (login='admin' or email='admin@mail#') AND password = 12345;
-
     // query() - отправляем запрос
     // fetchAll() - получаем ответ 
     $result = $dbh->query($sql)->fetchAll();
-
-    echo '<pre>';
-    var_dump($result);
+    // если пользователь был найден
+    if ($result)
+    {
+        // положили данные по ключу USER в сессию
+        $_SESSION['USER'] = current($result);
+        // перенаправляет пользователя на страницу
+        header('Location: /shop2023',true,301);
+        exit;
+    } 
+    else
+    {
+        die('Неверный логин или пароль!');
+    }
 
 }
 
