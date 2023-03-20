@@ -44,9 +44,3 @@ if($role !=3)
     <input type="submit" value="Добавить товар">
 </form>
 
-<form action="">
-    <input type="text" placeholder="Логин или электронная почта">
-    <input type="password" placeholder="Пароль">
-    
-
-</form>
