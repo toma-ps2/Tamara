@@ -1,4 +1,5 @@
 <?php
+require_once('config.php');
 session_start();
 //echo '<pre>';
 // $_POST - массив - содержит в себе информацию о POST запросе
@@ -28,9 +29,22 @@ if (isset($_POST['action']))
     {
         case 'add-product':
                 // посмотреть список входящих файлов!
-                echo '<pre>';
+                // echo '<pre>';
                 // массив с файлами
-                $files = [];
+            $name = $_POST['name']?? NULL;
+            $article = $_POST['article']?? NULL;
+            $description = $_POST['description']?? NULL;
+            $price = (int)$_POST['price']?? NULL;
+            $quantity =(int)$_POST['quantity']?? NULL;
+
+            $sth = $dbh->prepare("INSERT INTO products (name, article, description, quantity, price) VALUES (:n,:a, :d, :q, :p)");
+            $sth->execute(['n'=>$name, 'a'=>$article, 'd'=>$description, 'q'=>$quantity, 'p'=>$price]);
+            $insert_id = $dbh->lastInsertId();
+            if($insert_id)
+            {
+                if(count($_FILES)>0)
+                {
+                    $files = [];
                 foreach($_FILES['files']['name'] as $key => $value )
                 {
                     foreach($_FILES['files'] as $name => $arr)
@@ -38,8 +52,42 @@ if (isset($_POST['action']))
                         $files[$key][$name]= $arr[$key];  
                     }
                 }
+                $result = uploadFiles($files);
+                $sql = "INSERT INTO photos (id_products, url) VALUES";
+                $sql_values = '';
+                
+                foreach($result['files'] as $name)
+                {
+                    $name = validationStr($name);
+                    $name = ROOT_PATH.'/src/'.$name;
+                    $sql_values .= "($insert_id, '$name'),";
+                }
+                $sql_values = substr($sql_values, 0,strlen($sql_values)-1);
+
+                $sql = $sql.$sql_values;
+
+                $sth = $dbh->query($sql);
+
+                // $sth->execute();
+
+                if ($dbh->lastInsertId())
+                {
+                    echo 'Успешно добавили ссылку'. $dbh->lastInsertId();
+                }
+                }
+                // echo 'Успешно добавили товар'.$insert_id;
+            }
+            else
+            {
+                echo '<pre>';
+                var_dump($dbh->errorInfo());
+            }
+            
+
+                
 
                 //var_dump($files);
+                
 
         break;
 
@@ -60,6 +108,31 @@ if (isset($_POST['action']))
             die('Неизвестный параметр');
         break;
     }
+}
+
+function uploadFiles($files)
+{
+    $count = 0;
+    $response = [
+        'count'=>0,
+        'files'=>[]
+    ];
+
+    foreach($files as $array)
+    {
+        $fName = explode('.', $array['name']);
+        $fName2 = $fName[0].'_'.time().'.'.$fName[1];
+        $result = move_uploaded_file($array['tmp_name'],ROOT_PATH.'/src/'.$fName2);
+        if($result)
+        {
+            // echo'<pre>';
+            // echo 'Файл успешно перемещен';
+            $count++;
+            $response['files'][] = $fName2;
+        }
+    }
+    $response['count'] = $count;
+    return $response;
 }
 
 function search($text)

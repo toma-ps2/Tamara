@@ -6,7 +6,7 @@ session_start();
 // получили роль пользователя
 $role = $_SESSION['USER']['role'];
 
-if ($role != 9 ) {
+if ($role != 3 ) {
     header('Location: /shop2023',true,301);
     exit;
 }
