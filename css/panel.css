@@ -1,3 +1,6 @@
+*{
+    box-sizing: border-box;
+}
 .d-none {
     display: none!important;
 }
@@ -11,6 +14,26 @@ form {
 form input {
     padding: 10px;
     display: block;
+    width: 100%;
+}
+
+.drag_zone{
+    border: 2px dashed blueviolet;
+    height: 100px;
+    width: 100%;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.drag_zone:hover{
+    border: 2px solid rgb(53, 34, 178);
+    background-color: rgba(127, 255, 212, 0.458);
+}
+.drag_preview{
+    width: 100%;
+}
+.drag_preview_item{
+    height: 75px;
+    border: 1px solid black;
 }
 
 

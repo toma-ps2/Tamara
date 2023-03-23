@@ -49,7 +49,7 @@ if ($role != 3 ) {
 <script defer src="js/panel.js"></script>
 
 
-<h3>Добро пожаловать,мой повелитель <?=$_SESSION['USER']['login']?>!</h3>
+<h3>Добро пожаловать, <?=$_SESSION['USER']['login']?>!</h3>
 <a href="handler.php?logout=true">Выход</a>
 
 <form id="product" action="handler.php" method="POST" urldecode="x-www-form-urlencoded">
@@ -61,4 +61,13 @@ if ($role != 3 ) {
     <input type="file" name="files[]" multiple="multiple">
     <input class="d-none" type="text" name="action" value="add-product">
     <input type="submit" value="Добавить товар">
+    <div class="drag_zone">
+
+    </div>
+    <div class="drag_preview">
+        
+
+    </div>
+
 </form>
+
