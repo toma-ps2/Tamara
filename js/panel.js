@@ -5,6 +5,7 @@ const maxFileSize = 10 * 1024
 const preview = document.querySelector('.drag_preview')
 
 
+
 addProduct.addEventListener('click',(Event)=>{
     Event.preventDefault()
     // product - id в теге form
@@ -66,8 +67,18 @@ dropZone.addEventListener('drop', Event=>{
         let url = URL.createObjectURL(file)
         if (url)
         {
-            preview.insertAdjacentHTML('afterbegin', `<img src="${url}" class="drag_preview_item">`)
+            preview.insertAdjacentHTML('afterbegin', 
+            `<div class="main_item">
+            <img src="${url}" class="drag_preview_item">
+            <div class="close_item" onclick="closeImg()">x</div>
+            </div>`)
         } 
     })
     // console.log(Event.dataTransfer.files)
 })
+
+
+function closeImg(){
+    document.querySelector('.drag_preview_item').style.display = 'none'
+    document.querySelector('.close_item').style.display = 'none'
+}

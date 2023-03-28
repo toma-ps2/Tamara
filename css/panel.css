@@ -34,6 +34,30 @@ form input {
 .drag_preview_item{
     height: 75px;
     border: 1px solid black;
+
 }
+/* .drag_preview_item::after{
+    position: absolute;
+    content: "x";
+    color: black;
+    height: 10px;
+    top: 0;
+    right: 0;
+} */
+.main_item{
+    position: relative;
+    display: inline-block;
+    
+}
+.close_item{
+    height: 7px;
+    width: 7px;
+    color: darkgreen;
+    position: absolute;
+    right: 3px;
+    top: -3px;
+    cursor: pointer;
+}
+
 
 
